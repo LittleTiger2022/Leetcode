@@ -84,3 +84,30 @@ class Solution {
         return Math.min(1, A[query_row][query_glass]);
     }
 }
+
+// the fastest one 5ms, 41.6MB
+class Solution {
+    public double champagneTower(int poured, int query_row, int query_glass) {
+        // 滚动数组，一层的杯子
+        double[] cups = new double[100];
+        // 假设一开始全部分配到最顶层的一个杯子上
+        cups[0] = poured;
+        for (int i = 1; i <= query_row; i++) {
+            // 上一行，第一个杯子溢出的部分
+            double overflow = Math.max(0, cups[0] - 1);
+            cups[0] = 0;
+            double half;
+
+            // 把第i行的杯子都“满上”
+            for (int j = 0; j < i; j++) {
+                half = overflow/2;
+                cups[j] += half;
+                overflow = Math.max(0, cups[j+1] - 1);
+                cups[j+1] = half;
+            }
+        }
+        return cups[query_glass] > 1 ? 1 : cups[query_glass];
+    }
+}
+
+
