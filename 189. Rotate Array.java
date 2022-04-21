@@ -23,9 +23,9 @@ class Solution {
         if (nums.length==1) return;
         int rotate = k % length;
 
-        reverse(nums,0,length-rotate-1);
-        reverse(nums,length-rotate,length-1);
         reverse(nums,0,length-1);
+        reverse(nums,0,rotate-1);
+        reverse(nums,rotate,length-1);
     }
     void reverse(int[] nums, int start, int end) {
         while (start < end) {
