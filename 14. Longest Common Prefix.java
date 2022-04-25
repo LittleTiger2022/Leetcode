@@ -25,7 +25,8 @@ class Solution {
     }
 }
 
-// 1ms, leetcode solution
+// 1ms, leetcode solution ( Horizontal scanning)
+// use the first str as the LCP, and gradually shortern it to fit with the rest strings 
 class Solution {
     public String longestCommonPrefix(String[] strs) {
         if (strs.length==0) return "";
