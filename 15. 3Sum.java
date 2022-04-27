@@ -52,7 +52,7 @@ class Solution {
 }
 
 
-// 650 ms. The same method as above
+// 650 ms. The same method as above O(n**2)
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Set<List<Integer>> res  = new HashSet<>();
@@ -68,6 +68,30 @@ class Solution {
                 else if (sum<0) j++;
             }
 
+        }
+        return new ArrayList<>(res);
+
+    }
+}
+// 74 ms O(nlogn). Update the above code with 夹逼法
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> res  = new HashSet<>();
+        if(nums.length==0) return new ArrayList<>(res);
+        Arrays.sort(nums);
+        int sum=0;
+        for(int i=0; i<nums.length-2;i++){
+            if (nums[i]>0) break;
+            int j =i+1, k = nums.length-1;
+            while(j<k){
+                sum = nums[i]+nums[j]+nums[k];
+                if(sum==0) res.add(Arrays.asList(nums[i],nums[j],nums[k]));
+                 if ( sum <=0)
+                while(nums[j]==nums[++j] && k>j);
+                if (sum>=0) 
+                while(nums[k]== nums[--k] && k >j);
+            }
         }
         return new ArrayList<>(res);
 
