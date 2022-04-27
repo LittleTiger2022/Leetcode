@@ -36,6 +36,7 @@ class Solution {
 }
 
 // a simpler solution (if this number existing in every array, the map value should equal to the numbers of arrays)
+// note: this approach is valid, because this question only consider positive number, so each number can be used as index for array.
 // 2ms
 class Solution {
     public List<Integer> intersection(int[][] nums) {
