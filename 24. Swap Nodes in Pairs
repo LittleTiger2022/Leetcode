@@ -1,0 +1,15 @@
+// Input: head = [1,2,3,4]
+// Output: [2,1,4,3]
+// Recursion， everytime, swap two, and move to the next pair
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode p = head;
+        if (p==null || p.next ==null) return head;
+        ListNode newHead = p.next;
+        p.next = p.next.next;
+        newHead.next = p;
+        p = newHead.next.next;
+        newHead.next.next = swapPairs(p);
+        return newHead;
+        }
+}
