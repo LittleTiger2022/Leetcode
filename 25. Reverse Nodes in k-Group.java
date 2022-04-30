@@ -8,6 +8,7 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// idea: process k node each time. Use three points: pre, tail and cur. Use cur to move pre element to the tail, till pre and tail pointing the same place. Thenafter, move to the next k group.
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head==null || head.next==null || k<2 ) return head;
