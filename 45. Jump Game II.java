@@ -24,3 +24,19 @@ while (cur<n-1) {
         return minJump;
     }
 }
+
+// 2ms, but simpler based on greedy
+class Solution {
+    public int jump(int[] nums) {
+    int jumps = 0, curEnd = 0, curFarthest = 0;
+	for (int i = 0; i < nums.length - 1; i++) {
+		curFarthest = Math.max(curFarthest, i + nums[i]);
+		if (i == curEnd) {
+			jumps++;
+			curEnd = curFarthest;
+		}
+        System.out.println("i= " + i + " nums[i] = " + nums[i] + "  curEnd = " + curEnd + " jump = " + jumps);
+	}
+	return jumps;     
+    }
+}
