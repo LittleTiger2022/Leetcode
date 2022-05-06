@@ -61,3 +61,63 @@ class Solution {
         return water;
     }
 }
+
+
+// 1ms
+class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length==0) return 0;
+        
+        int left =0, right = height.length-1;
+        int maxLeft = 0, maxRight =0;
+        
+        int totalWater =0;
+        
+        while (left<right) {
+            if (height[left]<height[right]) {
+                if (height[left]>=maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    totalWater += maxLeft - height[left];
+                }
+                left++;
+                } else {
+                if (height[right]>=maxRight) {
+                    maxRight = height[right];
+                    
+                } else {
+                    totalWater +=maxRight - height[right];
+                }
+                right--;
+            }
+                
+            }
+        return totalWater;
+        }
+    }
+
+// 1ms 
+class Solution {
+    public int trap(int[] height) {
+        if (height.length<3) return 0;
+        int ans = 0;
+        int l=0, r = height.length -1;
+        while (l<r && height[l]<=height[l+1])
+            l++;
+         while (l<r && height[r]<=height[r-1])
+            r--;
+        while (l<r) {
+            int left = height[l];
+            int right = height[r];
+            
+            if (left<right)
+                while (l<r && left>=height[++l])
+                    ans +=left - height[l];
+            else
+                while (l<r && height[--r]<=right)
+                    ans +=right -height[r];
+        }
+        return ans;
+        
+    }
+}
