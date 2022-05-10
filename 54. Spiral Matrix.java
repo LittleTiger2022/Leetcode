@@ -124,3 +124,43 @@ class Solution {
        return list;  
     }
 }
+// It turns out "switch" is not needed,as I follow the correct order for spiral matrix
+// solution 3: clean up switch parts
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int nrow = matrix.length, ncol = matrix[0].length;
+        List<Integer> list = new ArrayList<Integer>();
+        
+        int totalN = nrow*ncol, curID = 0;       
+        int left=0,right=ncol-1, top=0,bottom = nrow-1;
+        
+        while (curID<totalN) {
+            // left to right
+            for (int i=left; i<=right && curID<totalN; i++) {
+                list.add(matrix[top][i]);
+                curID++;
+            }
+                top++;
+            // top to bottom
+                for (int i=top;i<=bottom && curID<totalN;i++) {
+                    list.add(matrix[i][right]);
+                    curID++;
+                }
+                right--;
+
+            // bottom right to bottom left
+                for (int i = right;i>=left && curID<totalN;i--) {
+                    list.add(matrix[bottom][i]);
+                    curID++;
+                }
+                bottom--;
+
+                for (int i = bottom; i >=top && curID<totalN; i--) {
+                     list.add(matrix[i][left]);
+                      curID++;
+                }
+                  left++;
+        }
+       return list;  
+    }
+}
