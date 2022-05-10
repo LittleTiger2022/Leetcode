@@ -1,5 +1,5 @@
 // 17 ms, my original code (solution 1)
-// 1ms after removing print out parts and corner cases. (see solution 2)
+// 0 ms after removing print out parts and corner cases. (see solution 2)
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         int nrow = matrix.length, ncol = matrix[0].length;
@@ -77,8 +77,7 @@ class Solution {
         int nrow = matrix.length, ncol = matrix[0].length;
         List<Integer> list = new ArrayList<Integer>();
         
-        int totalN = nrow*ncol;
-        int curRow = 0, curCol = 0, curID = 0;
+        int totalN = nrow*ncol, curID = 0;
         
         int switch1 = 0; // 0 ->, 1 down, 2 <-, 3 for up.
         int left=0,right=ncol-1, top=0,bottom = nrow-1;
