@@ -1,0 +1,97 @@
+// 0 ms (passed with in the first try :) ) similar to offical LT solution 1
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int [][] spiralMatrix = new int [n][n];
+        
+        int left=0, right = n-1, top = 0, bottom = n-1;
+        
+        int Count = 1;
+        while (left<=right && top <= bottom) {
+            // left to right (top)
+            for (int i=left;i<=right;i++)
+            {
+                spiralMatrix[top][i] = Count;  
+                Count ++;
+            }
+            top++;
+            // top to bottom (right side)
+            for (int i=top;i<=bottom;i++) {
+                spiralMatrix[i][right] = Count;
+                Count++;
+            }
+            right--;
+            // right to left (bottom)
+            for (int i=right;i>=left;i--) {
+                spiralMatrix[bottom][i] = Count;
+                Count++;
+            }
+            bottom --;
+            // bottom to top (left side)
+            for (int i=bottom;i>=top;i--) {
+                spiralMatrix[i][left] = Count;
+                Count++;
+            }
+            left++;
+        }
+        return spiralMatrix;
+    }
+}
+
+//Solution 2: recursive version
+// 0 ms
+class Solution {
+    public int[][] generateMatrix(int n) {
+       int ans[][] = new int[n][n];
+        fillMatrix(ans, 0 , 0, 1,'r');
+        return ans;
+    }
+    
+    public void fillMatrix(int [][]ans, int i, int j, int cur, char dir){
+        if(i < 0 || j < 0 || i >=ans.length ||  j >= ans.length) return;
+        
+        if(ans[i][j] != 0) return;
+        
+        ans[i][j] = cur;
+        
+        if(dir == 'u'){
+            fillMatrix(ans, i-1,j,cur+1, 'u');    
+        }
+        
+        fillMatrix(ans, i,j+1,cur+1, 'r');
+        fillMatrix(ans, i+1,j,cur+1, 'd');
+        fillMatrix(ans, i,j-1,cur+1, 'l');
+        fillMatrix(ans, i-1,j,cur+1, 'u');
+    }
+}
+
+// solution 3:  Optimized spiral traversal (LT offical solution 2)
+// 0ms
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int cnt = 1;
+        int dir[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int d = 0;
+        int row = 0;
+        int col = 0;
+        while (cnt <= n * n) {
+            result[row][col] = cnt++;
+            int r = Math.floorMod(row + dir[d][0], n);
+            int c = Math.floorMod(col + dir[d][1], n);
+
+            // change direction if next cell is non zero
+            if (result[r][c] != 0) d = (d + 1) % 4;
+
+            row += dir[d][0];
+            col += dir[d][1];
+        }
+        return result;
+    }
+}
+
+
+Complexity Analysis
+
+// Time Complexity: O(n**2). Here, nn is given input and we are iterating over n\cdot nn⋅n matrix in spiral form.
+Space Complexity: O(n) We use constant extra space for storing cntcnt.
