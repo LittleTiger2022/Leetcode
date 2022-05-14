@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isNumber(String s) {
+        s = s.trim().toLowerCase();
+        int n = s.length(), sign = 0;
+        boolean hasNum=false, hasDot = false, hasE=false;
+        char [] cs = s.toCharArray();
+        for (int i=0;i<n;i++) {
+            char c = cs[i];
+            if (!isValid(c))
+                return false;
+            if (c=='+' || c=='-')
+                if (i==n-1 || sign==2 || hasNum || (i>0 && cs[i-1]!='e'))
+                    return false;
+                else
+                    sign++;
+            else if (c=='.')
+                if(hasE|| hasDot|| (i==n-1 && !hasNum))
+                    return false;
+            else
+                hasDot = true;
+            else if (c=='e') {
+                if (!hasNum || hasE || i==n-1)
+                    return false;
+                hasE=true;
+                hasNum = false;
+            } else 
+                hasNum = true;
+            }
+        return hasNum;
+        }
+        
+        boolean isValid(char c){
+            return c=='.'|| c=='+'|| c=='-'||c=='e'|| c>='0' && c<='9';
+        }
+    }
+
