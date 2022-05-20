@@ -16,3 +16,29 @@ class Solution {
         }
     }
 }
+// lexicographic (Binary Sorted) Subsets
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        int n = nums.length;
+        
+             //   int nthBit = 1<< n;
+    //    for (int i=0;i<(int)Math.pow(2,n);i++) {
+    //        String bitmask = Integer.toBinaryString( i | nthBit).substring(1);
+        
+        for (int i = (int) Math.pow(2,n); i< (int) Math.pow(2,n+1);++i) {
+            String bitmask = Integer.toBinaryString(i).substring(1);
+            
+            List<Integer> curr = new ArrayList();
+            
+            for (int j=0;j<n;j++) {
+                if (bitmask.charAt(j)=='1') curr.add(nums[j]);
+                
+            }
+        
+        list.add(curr);
+        }
+        return list;
+    }
+}
+//
