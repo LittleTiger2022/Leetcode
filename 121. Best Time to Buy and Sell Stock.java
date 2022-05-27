@@ -11,6 +11,7 @@ class Solution {
     }
 }
 // cumulative sumation
+// also named as Kadane's Algorithm
 class Solution {
     public int maxProfit(int[] prices) {
         int maxCur=0,maxSoFar = 0;
