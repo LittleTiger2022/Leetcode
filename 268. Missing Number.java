@@ -44,7 +44,7 @@ class Solution {
 // In a complete array with no missing numbers, the index and value should be perfectly corresponding( nums[index] = index), 
 // so in a missing array, what left finally is the missing number.")
 
-
+// it takes 0ms
 class Solution {
     public int missingNumber(int[] nums) {
             int xor = 0, i = 0;
@@ -53,6 +53,18 @@ class Solution {
 	}
 
 	return xor ^ i;
+
+    }
+}
+// another solution using XOR (it takes 1 ms)
+class Solution {
+    public int missingNumber(int[] nums) {
+            int res = 0;
+	for (int i = 1; i <= nums.length; i++) {
+		res ^=  i ^ nums[i-1];
+	}
+
+	return res;
 
     }
 }
