@@ -38,6 +38,13 @@ class Solution {
 }
 
 // the coolest solution is to use XOR
+// this a very smart idea: 
+// use XOR: a^b^b =a. 0-n should match with index, so the only missing value can be recovery from
+// quote ("In this solution, I apply XOR operation to both the index and value of the array. 
+// In a complete array with no missing numbers, the index and value should be perfectly corresponding( nums[index] = index), 
+// so in a missing array, what left finally is the missing number.")
+
+
 class Solution {
     public int missingNumber(int[] nums) {
             int xor = 0, i = 0;
