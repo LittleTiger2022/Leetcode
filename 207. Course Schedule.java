@@ -78,3 +78,37 @@ class Solution {
         return true;
     }
 }
+\\ solution 3
+    \\ 12 ms
+    class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int [] preCount = new int[numCourses];
+        int finishable =0;
+        
+        Map<Integer,List<Integer>> m = new HashMap<>();
+        
+        for ( int[] p:prerequisites ) {
+            List<Integer> c = m.getOrDefault(p[1], new ArrayList<>());
+            c.add(p[0]);
+            m.put(p[1],c);
+            ++preCount[p[0]];
+        }
+        
+        Queue <Integer> q = new LinkedList<>();
+        for (int i=0;i<numCourses;i++) 
+            if (preCount[i]==0)
+                q.offer(i);
+        
+            while (!q.isEmpty()) {
+                int cur = q.poll();
+                ++finishable;
+            for (int n: m.getOrDefault(cur, new ArrayList<>())) {
+                --preCount[n];
+                if (preCount[n]==0)
+                    q.offer(n);
+            }
+                
+            }
+        return finishable == numCourses;
+    }
+}
