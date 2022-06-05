@@ -112,3 +112,48 @@ class Solution {
         return finishable == numCourses;
     }
 }
+    
+// 38 ms, easy to understand solution
+    class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+     //first collect all the courses that need to take from prerequisite
+
+int[] needsForDegree = new int[numCourses];
+for(int i = 0; i < prerequisites.length; i++){
+	needsForDegree[prerequisites[i][0]]++; //count the number of prerequisites for each course
+	//for example: [1, 0], [1, 2], then course 1 needs 2 prerequisites
+}
+
+Queue<Integer> availableClasses = new LinkedList<Integer>();
+//now search for any class that doesn't need prequisite class among all classes
+for(int i = 0; i < needsForDegree.length; i++){
+	if(needsForDegree[i] == 0){
+		availableClasses.offer(i);
+	}
+}
+while(!availableClasses.isEmpty()){
+	//select an takable class
+	int startClass = availableClasses.poll();
+	//check if it satisfies any classes' prereq
+	for(int i = 0; i < prerequisites.length; i++){
+		if(prerequisites[i][1] == startClass){
+			//then reduce the num of prereq needed for this class
+			needsForDegree[prerequisites[i][0]]--;
+			//now check if this class can be completed
+			if(needsForDegree[prerequisites[i][0]] == 0){
+				//puts it into the available class
+				availableClasses.offer(prerequisites[i][0]);
+			}
+		}
+	}
+}
+
+//now check if all the prerequsites are reduced to 0 for every class
+for(int count : needsForDegree){
+	if(count != 0)
+		return false; 
+}
+ return true; 
+ 
+    }
+}
