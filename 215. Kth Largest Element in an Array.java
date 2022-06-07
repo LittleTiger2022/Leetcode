@@ -33,6 +33,19 @@ class Solution {
         }
     }
     
+    // solution 3
+    // use priorityQueue
+    class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        Queue<Integer>pq = new PriorityQueue<>();
+        for (int val:nums) {
+            pq.offer(val);
+            if (pq.size()>k)
+                pq.poll();
+        }
+        return pq.peek();
+    }
+}
     //Use median-of-three strategy to choose pivot
     private int medianOf3(int[] nums, int left, int right) {
         int mid = left + (right - left) / 2;
