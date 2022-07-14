@@ -67,3 +67,30 @@ class Solution {
         return days;
     }
 }
+// easy to understand priorQueue
+ class Solution {
+    public int fillCups(int[] amount) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        pq.add(amount[0]);
+        pq.add(amount[1]);
+        pq.add(amount[2]);
+        int sec = 0;
+        while(!pq.isEmpty()){
+            int top  = pq.poll();
+            int next = pq.poll();
+            if(top==0 || next==0){
+                sec=sec+Math.max(top,next);
+                break;
+            }
+            else{
+                pq.add(top-1);
+                pq.add(next-1);
+                sec++;
+            }
+        }
+        return sec;
+    }
+   
+}
+
+   
