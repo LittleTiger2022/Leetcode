@@ -1,4 +1,4 @@
-//
+////
 SELECT s.product_id, product_name
 FROM Sales s
 LEFT JOIN Product p
