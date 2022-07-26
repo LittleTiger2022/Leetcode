@@ -1,5 +1,6 @@
 // use status tranfer diagram
 // 1ms 93% 42.5Mbs 31%
+// similar problem: 198
 class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
