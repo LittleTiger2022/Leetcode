@@ -70,3 +70,28 @@ class Solution {
 
     }
 }
+// My new solution for Grind75
+// 3ms (95%) 43 (54%)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        int sLen = s.length();
+        if (sLen!=t.length())
+            return false;
+        
+        int [] alphabetTable = new int [26];
+        
+        for (int i=0;i<sLen;i++) {
+            alphabetTable[s.charAt(i)-'a']++;
+            alphabetTable[t.charAt(i)-'a']--;
+        }
+        boolean res = true;
+        for (int i=0;i<26;i++) {
+            if (alphabetTable[i]!=0) {
+                res=false;
+                break;
+            }
+        }
+        return res;
+    }
+}

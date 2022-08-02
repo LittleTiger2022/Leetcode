@@ -78,3 +78,41 @@ class Solution {
         return true;
     }
 }
+
+// my grind75 solution 
+//3ms (99%) 42Mb (96%)
+class Solution {
+    public boolean isPalindrome(String s) {
+        char [] cleanS = new char[s.length()];
+        int realN =0;
+        boolean res;
+        for (int i=0;i<s.length();i++) {
+            if (s.charAt(i)>='A' && s.charAt(i)<='Z')  {
+                cleanS[realN++] = (char) (s.charAt(i)-'A'+'a');
+            }
+            if (s.charAt(i)>='a' && s.charAt(i)<='z') {
+                cleanS[realN++] = s.charAt(i);
+            }
+            
+            if (s.charAt(i)>='0' && s.charAt(i)<='9') {
+                cleanS[realN++] = s.charAt(i);
+            }
+        }
+        if (realN==0) 
+            return true;
+        res = true;
+        int left=0, right = realN-1;
+        while (left<right) {
+            if (cleanS[left]==cleanS[right])
+            {
+                left++;
+                right--;
+            }
+            else {
+                res =false;
+                break;
+            }
+        }
+        return res;
+    }
+}
